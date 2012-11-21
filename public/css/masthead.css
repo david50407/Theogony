@@ -1,0 +1,29 @@
+/*
+ * @filename masthead.css
+ * @description stylesheet of masthead.
+ * @author davy
+ *
+ * @modify
+ *     v0 2012.08.26 16:09 (GMT +8)
+ *         move from container.css
+ */
+
+div#masthead-container {
+	position: relative;
+}
+
+div#masthead {
+	margin: 0 auto;
+	width: 1000px;
+	height: 60px;
+}
+
+#masthead #logo-container {
+	float: left;
+}
+
+#masthead #user-bar-container {
+	float: right;
+	padding-top: 10px;
+}
+

@@ -1,0 +1,10 @@
+RewriteEngine on
+RewriteBase /~david50407/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} ^/~david50407/(.+)$
+RewriteCond /home/david50407/public_html/public/%1 -f
+RewriteRule ^(.*)$ public/%1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ config/routes.php [L]
