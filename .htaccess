@@ -1,9 +1,9 @@
 RewriteEngine on
-RewriteBase /~david50407/
+RewriteBase /
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} ^/~david50407/(.+)$
-RewriteCond /home/david50407/public_html/public/%1 -f
+RewriteCond %{REQUEST_URI} ^/(.+)$
+RewriteCond [your website directory]/public/%1 -f
 RewriteRule ^(.*)$ public/%1 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
