@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Theogony</title>
-		<base href="http://<?=$_SERVER["HTTP_HOST"]?>/~david50407/"><!--[if lte IE 6]></base><![endif]-->
+		<base href="http://<?=$_SERVER["HTTP_HOST"]?>"><!--[if lte IE 6]></base><![endif]-->
 		<link rel="stylesheet" href="css/reset.css" />
 		<link rel="stylesheet" href="css/container.css" />
 		<link rel="stylesheet" href="css/mainlist.css" />

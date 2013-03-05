@@ -3,7 +3,7 @@ RewriteBase /
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} ^/(.+)$
-RewriteCond [your website directory]/public/%1 -f
+RewriteCond %{DOCUMENT_ROOT}/public/%1 -f
 RewriteRule ^(.*)$ public/%1 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
