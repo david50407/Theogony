@@ -1,4 +1,4 @@
-RewriteEngine on
+RewriteEngine On
 RewriteBase /
 
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -1,7 +1,7 @@
 <?php
-class AnnouncementController extends ActionController\Base
+class AnnouncementController extends \Theogony\ActionController\Base
 {
-	public function index($_)
+	public function index(&$_)
 	{
 		
 	}

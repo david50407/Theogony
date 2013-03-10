@@ -1,0 +1,47 @@
+/*
+ * @filename button.css
+ * @description styles of buttons.
+ * @author davy
+ *
+ * @modify
+ *     v0 2012.08.24 18:38 (GMT +8)
+ *         3D button style.
+ */
+
+button {
+	background-color: #E0E0E0;
+	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#fff0f0f0,EndColorStr=#ffe6e6e6);
+	background-image: -moz-linear-gradient(top, #F0F0F0 0px, #E6E6E6 100%);
+	background-image: -ms-linear-gradient(top, #F0F0F0 0px, #E6E6E6 100%);
+	background-image: -o-linear-gradient(top, #F0F0F0 0px, #E6E6E6 100%);
+	background-image: -webkit-linear-gradient(top, #F0F0F0 0px, #E6E6E6 100%);
+	background-image: linear-gradient(to bottom, #F0F0F0 0px, #E6E6E6 100%);
+	border: #AAA solid 1px;
+	border-radius : 2px;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px 0px, white 0px 0px 3px 0px inset;
+	box-sizing: border-box;
+	color: #555;
+	display: inline-block;
+	margin: 1px 3px 0px 3px;
+	outline-color: #555;
+	outline-style: none;
+	outline-width: 0px;
+	padding: 0.2em 0.5em;
+	text-align: center;
+	text-shadow: white 0px 1px 0px;
+}
+
+button:hover {
+	background: #EEE;
+	border-color: #888;
+	color: #333;
+}
+
+button:active {
+	background: #E0E0E0;
+	border-bottom-color: #888;
+	border-color: #AAA;
+	box-shadow: white 0px 1px 2px 0px,
+		rgba(0, 0, 0, 0.2) 0px 0px 2px 0px inset, 
+		rgba(0, 0, 0, 0.3) -2px 2px 5px 0px inset;
+}

@@ -14,12 +14,12 @@ ini_set("display_errors","On");
 Theogony\RoutesCore::draw(function($router) {
 	# You can set prefix directory for this site.
 	#		$router->predir = '/';
-	$router->predir = '~david50407/';
+	$router->predir = '/';
 
   # Sample of regular route:
   #   $router->match(array('products/:id' => 'catalog#view'));
   # Keep in mind you can assign values other than :controller and :action
-	$router->match(array('announcement/:id' => '#index'));
+	$router->match(array('post/:id(.:format)' => 'pages#view'));
 
   # Sample of named route:
   #		$router->match(array('products/:id/purchase' => 'catalog#purchase', ':as' => 'purchase'));
@@ -27,7 +27,7 @@ Theogony\RoutesCore::draw(function($router) {
 	# You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # $router->root = 'welcome#index';
-	$router->root = 'announcement#index';
+	$router->root = 'homepage#index';
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
