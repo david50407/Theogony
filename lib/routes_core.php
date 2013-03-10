@@ -153,7 +153,7 @@ echo $_GET['a'];
 			include_once dirname(__FILE__) . '/../app/controllers/' . $option['controller'] . '_controller.php';
 			$controller = ucfirst(strtolower($option['controller'])) . 'Controller';
 			$controller = new $controller();
-			$temp = new \Theogony\Struct\TemporaryCollection();
+			$temp = new \Theogony\Struct\DataCollection();
 			$temp->option = $option;
 			$controller->$option['action']($temp);
 			$controller->_view($option['controller'], $temp);

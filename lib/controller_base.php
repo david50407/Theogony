@@ -2,26 +2,37 @@
 namespace Theogony\ActionController;
 class Base
 {
-	protected $settings = array();
+	private $cache;
+	protected $settings;
 	protected $format = 'html';
+	public function __construct($controller)
+	{
+		$this->cache = new \Theogony\Struct\DataCollection();
+		$this->settings = new \Theogony\Struct\DataCollection();
+
+		$this->cache->controller = strtolower(preg_replace('/Controller$/', '', $controller));
+	}
+
 	public function _view($action, $_)
 	{
-		if (isset($this->settings['layout']))
+		$layout_path = dirname(__FILE__) . '/../app/views/layouts/';
+		if (isset($this->settings->layout))
 		{
-			if (!@file_exists(dirname(__FILE__) . '/../app/views/layouts/' . $this->settings['layout'] . '.' . $this->format . '.php'))
-				throw new \Theogony\Exceptions\NoAvailableLayoutException($this->settings['layout'] . '.' . $this->format);
-			include dirname(__FILE__) . '/../app/views/layouts/' . $this->settings['layout'] . '.' . $this->format . '.php';
+			if (!@file_exists($layout_path . $this->settings->layout . '.' . $this->format . '.php'))
+				throw new \Theogony\Exceptions\NoAvailableLayoutException($this->settings->layout . '.' . $this->format);
+			include $layout_path . $this->settings->layout . '.' . $this->format . '.php';
 		}
 		else
 		{
-			$layout = strtolower(preg_replace('/Controller$/', '', __CLASS__));
-			if (@file_exists(dirname(__FILE__) . '/../app/views/layouts/' . $layout . '.' . $this->format . '.php'))
-				include dirname(__FILE__) . '/../app/views/layouts/' . $layout . '.' . $this->format . '.php';
+			if (@file_exists($layout_path . $this->cache->controller . '.' . $this->format . '.php'))
+				include $layout_path . $this->cache->controller . '.' . $this->format . '.php';
+			else if (@file_exists($layout_path . 'application.' . $this->format . '.php'))
+				include $layout_path . 'application.' . $this->format . '.php';
 			else
-				include dirname(__FILE__) . '/../app/views/layouts/application.' . $this->format . '.php';
+				throw new \Theogony\Exceptions\NoAvailableLayoutException($this->cache->controller . '.' . $this->format);
 		}
 	}
-	public function child()
+	public function yield()
 	{
 		
 	}
