@@ -6,7 +6,7 @@ class HomepageController extends \Theogony\ControllerBase
 		$_->subtitle = "Index";
 		
 		# grab articles: limit=5
-		#$_->articles = Post::limit(5);
+		$_->articles = Post::limit(5);
 	}
 }
 ?>

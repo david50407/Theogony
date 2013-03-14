@@ -2,6 +2,7 @@
 namespace Theogony;
 class ModelBase
 {
+	protected static $columns = array();
 	protected $instance = NULL;
 	private $cache;
 	private $__data;
@@ -17,14 +18,14 @@ class ModelBase
 		$model = get_called_class();
 		$db = \Theogony\ConfigCore::getInstance()->database;
 
-		$result = $db->from($model)->limit($times)->do();
+		$result = $db->from($model)->limit($times)->run();
 
 		$ret = array();
 		foreach ($result as $res)
 			$ret[] = new $model($res);
 	}
 
-	public __get($k)
+	public function __get($k)
 	{
 		if (!isset($this->__data))
 			return null;
