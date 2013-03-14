@@ -1,13 +1,4 @@
 <?php
-/*
- * @filename routes_core.php
- * @description Core of routes
- * @author davy
- *
- * @modify
- *     v1 2013.03.09 08:38 (GMT +8)
- *         pushing config to static variable.
- */
 namespace Theogony;
 
 class RoutesCore
@@ -19,7 +10,7 @@ class RoutesCore
 		)
 	);
 	private static $__instance = null;
-	private static $__matches = array();
+	private $__matches = array();
 	public $root = 'welcome#index';
 	public $predir = '';
 
@@ -84,7 +75,7 @@ class RoutesCore
 		$str = preg_replace('/:(\w+)/', '(?P<$1>.+)', $str);
 		$obj['regex'] = '#^' . $str . '$#';
 
-		self::$__matches[] = $obj;
+		$this->__matches[] = $obj;
 	}
 
 	public function parse()
@@ -137,12 +128,14 @@ class RoutesCore
 					break;
 				}
 			}
-
-		if (!isset($option))
+		if (!isset($option) || $option == NULL)
 		{
-			//header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-			//header("Status: 404 Not Found");
-echo $_GET['a'];
+			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+			header("Status: 404 Not Found");
+			
+			$option['status'] = 404;
+			# TODO: load 404 page
+			header('Location: /');
 			return;
 		}
 		else
@@ -155,8 +148,9 @@ echo $_GET['a'];
 			$controller = new $controller();
 			$temp = new \Theogony\Struct\DataCollection();
 			$temp->option = $option;
+			$controller->_setData($temp);
 			$controller->$option['action']($temp);
-			$controller->_view($option['controller'], $temp);
+			$controller->_view($option['controller']);
 		}
 	}
 }

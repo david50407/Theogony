@@ -1,15 +1,12 @@
 <?php
-class HomepageController extends \Theogony\ActionController\Base
+class HomepageController extends \Theogony\ControllerBase
 {
-	public function __construct()
-	{
-		parent::__construct(__CLASS__);
-	}
-
 	public function index(&$_)
 	{
 		$_->subtitle = "Index";
 		
+		# grab articles: limit=5
+		#$_->articles = Post::limit(5);
 	}
 }
 ?>
