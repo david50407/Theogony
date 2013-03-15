@@ -41,6 +41,18 @@ class Mysql
 		return $rtn;
 	}
 
+	public function where($fetch)
+	{
+		if (!$this->deplicated)
+			$rtn = clone $this;
+		else
+			$rtn = $this;
+
+		$rtn->command['fetch'] = $this->connection->real_escape_string($fetch);
+
+		return $rtn;
+	}
+
 	public function limit($limit)
 	{
 		if (!$this->deplicated)
@@ -58,6 +70,9 @@ class Mysql
 		if (!isset($this->command['from']))
 			return array();
 		$sql = 'select * from `' . $this->command['from'] . '`';
+
+		if (isset($this->command['where']))
+			$sql .= ' where ' . $this->command['where'];
 
 		if (isset($this->command['limit']))
 			$sql .= ' limit ' . $this->command['limit'];

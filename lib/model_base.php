@@ -41,6 +41,22 @@ class ModelBase
 		}
 	}
 
+	# dangerous
+	public static function all()
+	{
+		$model = get_called_class();
+		$table = strtolower(\Theogony\Helper\Inflector::pluralize($model));
+		$db = \Theogony\ConfigCore::getInstance()->database;
+
+		$result = $db->from($table)->where('1')->run();
+
+		$ret = array();
+		foreach ($result as $res)
+			$ret[] = new $model($res);
+
+		return $ret;
+	}
+
 	public static function limit($times)
 	{
 		$model = get_called_class();

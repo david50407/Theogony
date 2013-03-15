@@ -24,6 +24,7 @@ class ControllerBase
 	{
 		$_ = &$this->data; # sugar
 		$config = \Theogony\ConfigCore::getInstance();
+		$this->cache->action = $action;
 		$layout_path = dirname(__FILE__) . '/../app/views/layouts/';
 		if (isset($this->settings->layout))
 		{
@@ -39,11 +40,11 @@ class ControllerBase
 				include $layout_path . 'application.' . $this->format . '.php';
 			else
 			{
-				$path = $this->cache->controller . '/';
+				$path = dirname(__FILE__) . '/../app/views/' . $this->cache->controller . '/';
 				$this->cache->usedLayout = false;
-				if (!@file_exists($path . $action . '.' . $this->format))
-					throw new \Theogony\Exceptions\NoAvailableLayoutException($path . $action . '.' . $this->format);
-				include $path . $action . '.' . $this->format;
+				if (!@file_exists($path . $action . '.' . $this->format . '.php'))
+					throw new \Theogony\Exceptions\NoAvailableLayoutException($this->cache->controller . '/' . $action . '.' . $this->format);
+				include $path . $action . '.' . $this->format . '.php';
 			}
 		}
 	}
@@ -51,6 +52,7 @@ class ControllerBase
 	{
 		$_ = &$this->data; # sugar
 		$config = \Theogony\ConfigCore::getInstance();
+		$action = $this->cache->action;
 		$path = dirname(__FILE__) . '/../app/views/' . $this->cache->controller . '/';
 		$layout_path = dirname(__FILE__) . '/../app/views/layouts/';
 		if (@file_exists($path . '_' . $file . '.' . $this->format . '.php'))
@@ -62,7 +64,16 @@ class ControllerBase
 	}
 	public function yield()
 	{
-		
+		if ($this->usedLayout) return;
+
+		$_ = &$this->data; # sugar
+		$config = \Theogony\ConfigCore::getInstance();
+
+		$path = dirname(__FILE__) . '/../app/views/' . $this->cache->controller . '/';
+		$this->cache->usedLayout = false;
+		if (!@file_exists($path . $action . '.' . $this->format . '.php'))
+			throw new \Theogony\Exceptions\NoAvailableLayoutException($this->cache->controller . $action . '.' . $this->format);
+		include $path . $action . '.' . $this->format . '.php';
 	}
 }
 

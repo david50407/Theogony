@@ -35,24 +35,9 @@
 			</section>
 <? 		endif; ?>
 <? 	endforeach; ?>
-			<section>
-				<section>
-					<h1>Router</h1>
-					<hr />
-					<p>regex rocks !</p>
-				</section>
-				<section>
-					<pre><code>
-:controller(/:action(/:id))(.:format)
-					</code></pre>
-				</section>
-			</section>
 <? endif; ?>
 		</div>
 	</div>
-<!-- Import navbar BEGIN -->
-<? $this->import('navbar') ?>
-<!-- Import navbar  END -->
 	<script src="/js/reveal.min.js"></script>
 	<script>
 		Reveal.initialize({
