@@ -21,6 +21,7 @@ class Mysql
 			throw new Exception\NotCallableFunctionException($callback);
 
 		$this->connection = new \mysqli($this->config->host, $this->config->username, $this->config->password, $this->config->database, 3306);
+		$this->connection->query("SET NAMES `UTF8`");
 	}
 
 	public function __clone()
@@ -35,8 +36,7 @@ class Mysql
 			$rtn = clone $this;
 		else
 			$rtn = $this;
-
-		$rtn->command['from'] = mysqli_real_escape_string(table);
+		$rtn->command['from'] = $this->connection->real_escape_string($table);
 
 		return $rtn;
 	}
@@ -57,12 +57,18 @@ class Mysql
 	{
 		if (!isset($this->command['from']))
 			return array();
-		$sql = 'select * from ' . $this->command['from'];
+		$sql = 'select * from `' . $this->command['from'] . '`';
 
 		if (isset($this->command['limit']))
 			$sql .= ' limit ' . $this->command['limit'];
 
-		return $this->connection->query($sql)->fetch_all(MYSQLI_ASSOC);
+		$result = $this->connection->query($sql);
+
+		$rtn = array();
+		while ($row = $result->fetch_assoc())
+			$rtn[] = $row;
+
+		return $rtn;
 	}
 }
 ?>

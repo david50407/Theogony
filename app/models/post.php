@@ -1,8 +1,10 @@
 <?php
-class Post extends \Theogony\ModelBase
+class Slide extends \Theogony\ModelBase
 {
 	public static $columns = array(
-		'test' => 'numberic'
+		'sid' => 'number',
+		'markdown' => 'bool',
+		'content' => 'string'
 	);
 }
 ?>
