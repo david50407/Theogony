@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="/css/print.css" media="print">
 	<link rel="stylesheet" href="/css/theme/default.css" id="theme">
 	<!-- For syntax highlighting -->
-	<link rel="stylesheet" href="/css/highlight/zenburn.css">
+	<link rel="stylesheet" href="/css/highlight/tomorrow-night-bright.css">
 	<link rel="stylesheet" href="/css/timer.css">
 <!--[if lt IE 9]>
 	<script src="/js/html5shiv.js"></script>
