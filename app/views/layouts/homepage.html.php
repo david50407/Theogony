@@ -2,7 +2,7 @@
 <html lang="zh_TW">
 <head>
 	<meta charset="UTF-8">
-	<title><?=$config->site->title?></title>
+	<title><?= $config->site->title; ?></title>
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -20,23 +20,23 @@
 <body>
 	<div class="reveal">
 		<div class="slides">
-<? if (count($_->slides) == 0): ?>
+<?php if (count($_->slides) == 0): ?>
 			<section data-markdown='\no-slides.md' data-separator="^\n\n\n" data-vertical="^\n\n"></section>
-<? else: ?>
-<? 	foreach ($_->slides as $slide): ?>
-<? 		if ($slide->markdown): ?>
+<?php else: ?>
+<?php 	foreach ($_->slides as $slide): ?>
+<?php 		if ($slide->markdown): ?>
 			<section data-markdown>
 				<script type="text/template">
-<?=$slide->content?>
+<?= $slide->content; ?>
 				</script>
 			</section>
-<? 		else: ?>
+<?php 		else: ?>
 			<section>
-<?=$slide->content?>
+<?= $slide->content; ?>
 			</section>
-<? 		endif; ?>
-<? 	endforeach; ?>
-<? endif; ?>
+<?php 		endif; ?>
+<?php 	endforeach; ?>
+<?php endif; ?>
 		</div>
 	</div>
 	<div class='timer'>	</div>

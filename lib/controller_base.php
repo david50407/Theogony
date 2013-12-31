@@ -62,9 +62,9 @@ class ControllerBase
 		else
 			throw new \Theogony\Exceptions\NoAvailableLayoutException($this->cache->controller . '\_' . $file . '.' . $this->format);
 	}
-	public function yield()
+	public function mixin()
 	{
-		if ($this->usedLayout) return;
+		if (!$this->cache->usedLayout) return;
 
 		$_ = &$this->data; # sugar
 		$config = \Theogony\ConfigCore::getInstance();

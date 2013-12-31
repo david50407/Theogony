@@ -1,8 +1,8 @@
 RewriteEngine On
-RewriteBase /
+RewriteBase /Theogony/
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} ^/(.+)$
+RewriteCond %{REQUEST_URI} ^/Theogony/(.+)$
 RewriteCond %{DOCUMENT_ROOT}/public/%1 -f
 RewriteRule ^(.*)$ public/%1 [L]
 
