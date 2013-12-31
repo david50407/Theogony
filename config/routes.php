@@ -5,7 +5,7 @@ ini_set("display_errors","On");
 Theogony\RoutesCore::draw(function($router) {
 	# You can set prefix directory for this site.
 	#		$router->predir = '/';
-	$router->predir = '/Theogony/';
+	$router->predir = '/';
 
   # Sample of regular route:
   #   $router->match(array('products/:id' => 'catalog#view'));

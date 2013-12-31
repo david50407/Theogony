@@ -23,7 +23,7 @@ class DataCollection
 		unset($this->_[$k]);
 	}
 
-	public function __get($k)
+	public function &__get($k)
 	{
 		if (isset($this->_[$k]))
 			return $this->_[$k];

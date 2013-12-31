@@ -8,5 +8,9 @@ foreach (glob(dirname(__FILE__) . '/../app/models/*.[pP][hH][pP]') as $file)
 	include_once $file;
 
 # load plugins
+foreach (glob(dirname(__FILE__) . '/../app/helpers/*.[pP][hH][pP]') as $file)
+  include_once $file;
 /* TODO: make plugins work */
+
+@session_start();
 ?>

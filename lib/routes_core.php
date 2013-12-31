@@ -58,13 +58,13 @@ class RoutesCore
 
 		if ($controller_override != null)
 		{
-			$controller_override = explode($controller_override, '#');
+			$controller_override = explode('#', $controller_override);
 			if (count($controller_override) == 2) # controller#action
 			{
 				if ($controller_override[0] != '' && !isset($obj['params']['controller'])) # has pointed a controller
 					$obj['params']['controller'] = $controller_override[0];
 				if (!isset($obj['params']['action']))
-					$obj['params']['aciton'] = $controller_override[1];
+					$obj['params']['action'] = $controller_override[1];
 			}
 			else if (!isset($obj['params']['controller']))
 				$obj['params']['controller'] = $controller_override;
@@ -72,7 +72,8 @@ class RoutesCore
 
 		// make str to regexp
 		$str = preg_replace('/\)/', ')?', $obj['str']);
-		$str = preg_replace('/:(\w+)/', '(?P<$1>.+)', $str);
+		$str = preg_replace('/\./', '\.', $str);
+		$str = preg_replace('/:(\w+)/', '(?P<${1}>\w+)', $str);
 		$obj['regex'] = '#^' . $str . '$#';
 
 		$this->__matches[] = $obj;
@@ -81,6 +82,12 @@ class RoutesCore
 	public function parse()
 	{
 		$request = $_SERVER['REQUEST_URI'];
+		if (isset($_SERVER['QUERY_STRING']))
+		{
+			$pos = strrpos($_SERVER['REQUEST_URI'], "?" . $_SERVER['QUERY_STRING']);
+			if ($pos !== false)
+				$request = substr($request, 0, $pos);
+		}
 		$request_arr = array_values(array_diff(explode('/', $request), array(null, '')));
 		if ($this->predir != '')
 		{
@@ -135,22 +142,25 @@ class RoutesCore
 			
 			$option['status'] = 404;
 			# TODO: load 404 page
-			header('Location: /');
+			#header('Location: /');
 			return;
 		}
 		else
 		{
+			if (!isset($option['format']))
+				$option['format'] = 'html';
+
 			if (!@file_exists(dirname(__FILE__) . '/../app/controllers/' . $option['controller'] . '_controller.php'))
 				throw new \Theogony\Exceptions\NoAvailableControllerException($option['controller']);
-
 			include_once dirname(__FILE__) . '/../app/controllers/' . $option['controller'] . '_controller.php';
 			$controller = ucfirst(strtolower($option['controller'])) . 'Controller';
 			$controller = new $controller();
 			$temp = new \Theogony\Struct\DataCollection();
 			$temp->option = $option;
 			$controller->_setData($temp);
+			$controller->_setFormat($option['format']);
 			$controller->$option['action']($temp);
-			$controller->_view($option['controller']);
+			$controller->_view($option['action']);
 		}
 	}
 }

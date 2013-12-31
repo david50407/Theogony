@@ -9,3 +9,10 @@ A new type PHP layout framework.
 ## License
 
 This project is under the MIT license (MIT).
+
+## License for PHPMailer
+
+We use [PHPMailer](https://github.com/Synchro/PHPMailer) for mailing function.
+
+PHPMailer is licenced under the LGPL 2.1.
+
